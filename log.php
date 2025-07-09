@@ -1,7 +1,10 @@
-<?php include("path.php"); ?>
+<?php
+include("path.php");
+include("./app/controllers/users.php");
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,21 +27,25 @@
         <!--Form start-->
 
         <div class="container reg_form log_form">
-            <form action="" method="post" class="row justify-content-center">
+            <form action="log.php" method="post" class="row justify-content-center">
                 <h2>Авторизация</h2>
+                <div class="mb-3 col-12 col-md-4 error">
+                    <p><i><?php echo $errorMessage ?></i></p>
+                </div>
+                <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
                     <label for="formGroupExampleInput" class="form-label">Ваш логин</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Пример подсказки поля ввода">
+                    <input type="email" name="mail_login" class="form-control" id="formGroupExampleInput" placeholder="Введите свой e-mail">
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
                     <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" name="password_login" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль">
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
-                    <button type="button" class="btn btn-secondary">Войти</button>
-                    <a href="reg.html">Зарегестрироваться</a>
+                    <button type="submit" name="button-log" class="btn btn-secondary">Войти</button>
+                    <a href="<?php echo BASE_URL . "reg.php" ?>">Зарегестрироваться</a>
                 </div>
             </form>
         </div>

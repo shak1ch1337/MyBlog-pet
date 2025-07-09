@@ -1,5 +1,7 @@
-<?php include("path.php"); ?>
-
+<?php
+include("path.php");
+include("app/database/database.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,7 +23,7 @@
         
         <?php //include("app/include/header.php"); ?>
         <?php include ("app/include/header.php"); ?>
-        <?php include ("app/database/database.php"); ?>
+        <?php //include ("app/database/database.php"); ?>
 
         <!--Slider start-->
 

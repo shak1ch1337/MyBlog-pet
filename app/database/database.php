@@ -1,7 +1,10 @@
 <?php
 
+session_start();
+
 require "connect.php";
 
+// Функция для тестирования
 function tt($value)
 {
     echo "<pre>";
@@ -91,11 +94,6 @@ function insert($table, $params)
     $mask = "";
     foreach ($params as $key => $value)
     {
-        if ($key == "password")
-        {
-            $value = password_hash($value, PASSWORD_BCRYPT);
-        }
-
         if ($key == "admin" && $value == false)
         {
             $value = 0;
@@ -118,13 +116,42 @@ function insert($table, $params)
     $query = $pdo->prepare($sql);
     $query->execute();
     databaseCheckError($query);
+    return $pdo->lastInsertId();
 }
 
-// $arrData = [
-//     "admin" => false,
-//     "username" => "Oleg",
-//     "email" => "Ole23g@test.com",
-//     "password" => "sdgsdg"
-// ];
+// Обновление записи в базе данных
+function update($table, $id, $params)
+{
+    global $pdo;
+    $i = 0;
+    $str = "";
+    foreach ($params as $key => $value)
+    {
+        if ($i === 0)
+        {
+            $str = $str . $key . " = " . "'$value'";   
+        }
+        else
+        {
+            $str = $str . ", " . $key . " = " . "'$value'";
+        }
+        $i++;
+    }
+    $sql = "UPDATE $table SET " . $str . " WHERE id = " . $id;
 
-// insert("users", $arrData);
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+}
+
+
+// Удаление записи из базы данных
+function delete($table, $id)
+{
+    global $pdo;
+    $sql = "DELETE FROM $table WHERE id = $id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+}

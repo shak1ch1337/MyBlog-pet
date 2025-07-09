@@ -306,6 +306,10 @@ header ul li ul li a {
     Reg form
 */
 
+.reg_form {
+    margin: 150px auto;
+}
+
 .reg_form h2 {
     text-align: center;
     margin: 30px 0;
@@ -330,4 +334,8 @@ header ul li ul li a {
 
 .log_form {
     margin: 150px auto;
+}
+
+.reg_form .error{
+    color: rgb(222, 52, 52);
 }

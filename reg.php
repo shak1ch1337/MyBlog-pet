@@ -1,7 +1,10 @@
-<?php include("path.php"); ?>
+<?php 
+include("path.php");
+include("./app/controllers/users.php");
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,32 +26,36 @@
 
         <!--Form start-->
         <div class="container reg_form">
-            <form action="" method="post" class="row justify-content-center">
+            <form action="reg.php" method="post" class="row justify-content-center">
                 <h2>Регистрация</h2>
+                <div class="mb-3 col-12 col-md-4 error">
+                    <p><i><?php echo $errorMessage ?></i></p>
+                </div>
+                <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
                     <label for="formGroupExampleInput" class="form-label">Ваш логин</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Пример подсказки поля ввода">
+                    <input type="text" class="form-control" id="formGroupExampleInput" name="username" placeholder="Введите ваш логин">
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
                     <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="mail" aria-describedby="emailHelp" placeholder="Введите ваш e-mail">
                     <div id="emailHelp" class="form-text">Мы никогда никому не передадим вашу электронную почту.</div>
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
                     <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Введите пароль">
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
                     <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
-                    <input type="password" class="form-control" id="exampleInputPassword2">
+                    <input type="password" class="form-control" name="password_repeat" id="exampleInputPassword2" placeholder="Введите пароль еще раз">
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">
-                    <button type="button" class="btn btn-secondary">Отправить</button>
-                    <a href="log.html">Авторизоваться</a>
+                    <button type="submit" name="button-reg" class="btn btn-secondary">Отправить</button>
+                    <a href="<?php echo BASE_URL . "log.php" ?>">Авторизоваться</a>
                 </div>
             </form>
         </div>
