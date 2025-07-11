@@ -4,6 +4,22 @@ include("./app/database/database.php");
 $isSubmit = false;
 $errorMessage = '';
 
+function userAuth($data)
+{
+    $_SESSION["id"] = $data["id"];
+    $_SESSION["login"] = $data["username"];
+    $_SESSION["admin"] = $data["admin"];
+
+    if ($_SESSION["admin"])
+    {
+        header("Location: " . BASE_URL . "admin/posts/index.php");
+    }
+    else
+    {
+        header("Location: " . BASE_URL);
+    }
+}
+
 
 //  Скрипт регистрации
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-reg"]))
@@ -38,19 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-reg"]))
             ];
             $user_id = insert("users", $params);
             $user = selectOne("users", ["id" => $user_id]);
-
-            $_SESSION["id"] = $user["id"];
-            $_SESSION["login"] = $user["username"];
-            $_SESSION["admin"] = $user["admin"];
-
-            if ($_SESSION["admin"])
-            {
-                header("Location: " . BASE_URL . "admin/admin.php");
-            }
-            else
-            {
-                header("Location: " . BASE_URL);
-            }
+            userAuth($user);
         } 
     }
 }
@@ -65,16 +69,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-log"]))
     else
     {
         $isset_user = selectOne('users', ["email" => $_POST["mail_login"]]);
-        // tt($isset_user);
-        // die();
-
-        if (trim(password_verify($_POST["password_login"], $isset_user["password"])))
+        if ($isset_user["password"] == password_verify($_POST["password_login"], $isset_user["password"]))
         {
-            echo "Авторизовать";
+            userAuth($isset_user);
         }
         else
         {
-            echo "Ошибка авторизации";
+            $errorMessage = "Почта или пароль введены неверно!";
         }
     }
 }
