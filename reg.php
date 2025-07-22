@@ -40,7 +40,6 @@ include("./app/controllers/users.php");
                 <div class="mb-3 col-12 col-md-4">
                     <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" name="mail" aria-describedby="emailHelp" placeholder="Введите ваш e-mail">
-                    <div id="emailHelp" class="form-text">Мы никогда никому не передадим вашу электронную почту.</div>
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">

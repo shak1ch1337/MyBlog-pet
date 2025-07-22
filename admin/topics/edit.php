@@ -44,16 +44,17 @@ include ("../../app/controllers/topics.php");
                         <div class="mb-12 col-12 col-md-12 error">
                             <p><i><?php echo $errorMessage ?></i></p>
                         </div>
-                        <form action="create.php" method="post">
+                        <form action="edit.php" method="post">
+                            <input name="id" value="<?=$id?>" type="hidden">
                             <div class="col">
-                                <input type="text" class="form-control" name="name" placeholder="Название категории" aria-label="Название категории">
+                                <input type="text" class="form-control" name="name" value="<?php echo $name ?>" placeholder="Название категории" aria-label="Название категории">
                             </div>
                             <div class="col">
                                 <label for="content" class="form-label">Описание категории</label>
-                                <textarea class="form-control" name="description" id="content" rows="3"></textarea>
+                                <textarea class="form-control" name="description" id="content" rows="3"><?php echo $description ?></textarea>
                             </div>
                             <div class="col">
-                                <button class="btn btn-primary" name="topic-create" type="submit">Создать категорию</button>
+                                <button class="btn btn-primary" name="topic-edit" type="submit">Создать категорию</button>
                             </div>
                         </form>
                     </div>

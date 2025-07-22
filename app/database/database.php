@@ -101,8 +101,8 @@ function insert($table, $params)
 
         if ($i === 0)
         {
-            $columns = $columns . $key;
-            $mask = $mask . $value;
+            $columns = $columns . "$key";
+            $mask = $mask . "'" . "$value" . "'";
         }
         else
         {
@@ -112,7 +112,7 @@ function insert($table, $params)
         $i++;
     }
     $sql = "INSERT INTO $table($columns) VALUES($mask)";
-
+    tt($sql);
     $query = $pdo->prepare($sql);
     $query->execute();
     databaseCheckError($query);
