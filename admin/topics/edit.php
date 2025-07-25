@@ -33,26 +33,31 @@ include ("../../app/controllers/topics.php");
 
                 <div class="posts col-9">
                     <div class="button row">
-                        <a href="<?php echo BASE_URL . "admin/topics/create.php" ?>" class="col-3 btn btn-success">Создать категорию</a>
+                        <a href="<?php echo BASE_URL . "admin/topics/create.php"?>" class="col-3 btn btn-success">Создать категорию</a>
                         <span class="col-1"></span>
                         <a href="<?php echo BASE_URL . "admin/topics/" ?>" class="col-3 btn btn-warning">Управление категориями</a>
                     </div>
                     <div class="row title-table">
-                        <h2>Управление категориями</h2>
-                        <div class="col-1">ID</div>
-                        <div class="col-5">Название</div>
-                        <div class="col-4">Управление</div>
+                        <h2>Добавление категории</h2>
                     </div>
-                    <?php
-                        foreach($topics as $key => $topic): 
-                    ?>
-                    <div class="row post">
-                        <div class="id col-1"><?php echo $topic["id"]?></div>
-                        <div class="title col-5"><?php echo $topic["name"] ?></div>
-                        <div class="red col-2"><a href="edit.php?id=<?php echo $topic["id"]?>">Edit</a></div>
-                        <div class="del col-2"><a href="edit.php?del_id=<?php echo $topic["id"] ?>">Delete</a></div>
+                    <div class="row add-post">
+                        <div class="mb-12 col-12 col-md-12 error">
+                            <p><i><?php echo $errorMessage ?></i></p>
+                        </div>
+                        <form action="edit.php" method="post">
+                            <input name="id" value="<?=$id?>" type="hidden">
+                            <div class="col">
+                                <input type="text" class="form-control" name="name" value="<?php echo $name ?>" placeholder="Название категории" aria-label="Название категории">
+                            </div>
+                            <div class="col">
+                                <label for="content" class="form-label">Описание категории</label>
+                                <textarea class="form-control" name="description" id="content" rows="3"><?php echo $description ?></textarea>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary" name="topic-edit" type="submit">Создать категорию</button>
+                            </div>
+                        </form>
                     </div>
-                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

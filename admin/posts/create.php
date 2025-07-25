@@ -1,6 +1,6 @@
 <?php
-session_start();
 include("../../path.php");
+include ("../../app/controllers/posts.php");
 ?>
 
 <!DOCTYPE html>
@@ -27,44 +27,45 @@ include("../../path.php");
         <?php include ("../../app/include/header-admin.php"); ?>
 
         <div class="container">
-            <div class="row">
-                <div class="sidebar col-3">
-                    <ul>
-                        <li><a href="#">Записи</a></li>
-                        <li><a href="#">Пользователи</a></li>
-                        <li><a href="#">Категории</a></li>
-                    </ul>
-                </div>
+            
+                <?php include ("../../app/include/sidebar-admin.php"); ?>
+
                 <div class="posts col-9">
                     <div class="button row">
-                        <a href="create.html" class="col-3 btn btn-success">Add post</a>
+                        <a href="<?php echo BASE_URL . "admin/posts/create.php" ?>" class="col-3 btn btn-success">Создать</a>
                         <span class="col-1"></span>
-                        <a href="index.html" class="col-3 btn btn-warning">Manage Posts</a>
+                        <a href="<?php echo BASE_URL . "admin/posts" ?>" class="col-3 btn btn-warning">Редактировать</a>
                     </div>
                     <div class="row title-table">
                         <h2>Добавление записи</h2>
                     </div>
                     <div class="row add-post">
-                        <form action="create.php" method="post">
+                        <form action="create.php" method="post" enctype="multipart/form-data">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Название статьи" aria-label="Название статьи">
+                                <input type="text" class="form-control" name="title" placeholder="Название статьи" aria-label="Название статьи">
                             </div>
                             <div class="col">
                                 <label for="content" class="form-label">Содержимое записи</label>
-                                <textarea class="form-control" id="content" rows="6"></textarea>
+                                <textarea class="form-control" name="content" id="content" rows="6"></textarea>
                             </div>
                             <div class="input-group col">
-                                <input type="file" class="form-control" id="inputGroupFile02">
+                                <input type="file" name="img" class="form-control" id="inputGroupFile02">
                                 <label class="input-group-text" for="inputGroupFile02">Upload</label>
                             </div>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" name="topic" aria-label="Default select example">
+                                <option selected>Выберите категорию</option>
+                                <?php foreach($topics as $key => $topic): ?>
+                                <option value="<?php echo $topic["id"]; ?>"><?php echo $topic["name"]; ?></option>
+                                <?php endforeach; ?>
                             </select>
-                            <div class="col">
-                                <button class="btn btn-primary" type="submit">Сохранить запись</button>
+
+                            <div class="col col-6">
+                                <input name="post_public" type="checkbox" value="1">
+                                <label>Publish</label>
+                            </div>
+
+                            <div class="col col-6">
+                                <button class="btn btn-primary" name="add_post" type="submit">Добавить запись</button>
                             </div>
                         </form>
                     </div>

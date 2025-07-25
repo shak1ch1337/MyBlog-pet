@@ -101,8 +101,8 @@ function insert($table, $params)
 
         if ($i === 0)
         {
-            $columns = $columns . $key;
-            $mask = $mask . $value;
+            $columns = $columns . "$key";
+            $mask = $mask . "'" . "$value" . "'";
         }
         else
         {
@@ -112,7 +112,7 @@ function insert($table, $params)
         $i++;
     }
     $sql = "INSERT INTO $table($columns) VALUES($mask)";
-
+    tt($sql);
     $query = $pdo->prepare($sql);
     $query->execute();
     databaseCheckError($query);
@@ -154,4 +154,25 @@ function delete($table, $id)
     $query = $pdo->prepare($sql);
     $query->execute();
     databaseCheckError($query);
+}
+
+// Выборка записей (постов) с автором в админ-панеле
+
+function selectAllFromPostsWithUsers($table1, $table2)
+{
+    global $pdo;
+    $sql = "SELECT
+    t1.id,
+    t1.title,
+    t1.img,
+    t1.content,
+    t1.status,
+    t1.id_topic,
+    t1.create_date,
+    t2.username
+    FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_user = t2.id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+    return $query->fetchAll();
 }

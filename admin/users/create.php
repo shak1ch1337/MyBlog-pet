@@ -27,19 +27,14 @@ include("../../path.php");
         <?php include ("../../app/include/header-admin.php"); ?>
 
         <div class="container">
-            <div class="row">
-                <div class="sidebar col-3">
-                    <ul>
-                        <li><a href="#">Записи</a></li>
-                        <li><a href="#">Пользователи</a></li>
-                        <li><a href="#">Категории</a></li>
-                    </ul>
-                </div>
+            
+                <?php include ("../../app/include/sidebar-admin.php"); ?>
+
                 <div class="posts col-9">
                     <div class="button row">
-                        <a href="create.html" class="col-3 btn btn-success">Создать пользователя</a>
+                        <a href="<?php echo BASE_URL . "admin/users/create.php" ?>" class="col-3 btn btn-success">Создать пользователя</a>
                         <span class="col-1"></span>
-                        <a href="index.html" class="col-3 btn btn-warning">Управление пользователями</a>
+                        <a href="<?php echo BASE_URL . "admin/users/" ?>" class="col-3 btn btn-warning">Управление пользователями</a>
                     </div>
                     <div class="row title-table">
                         <h2>Создать пользователя</h2>

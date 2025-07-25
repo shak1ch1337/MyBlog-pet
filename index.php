@@ -1,6 +1,6 @@
 <?php
 include("path.php");
-include("app/database/database.php");
+include("app/controllers/topics.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +21,7 @@ include("app/database/database.php");
     </head>
     <body>
         
-        <?php //include("app/include/header.php"); ?>
         <?php include ("app/include/header.php"); ?>
-        <?php //include ("app/database/database.php"); ?>
 
         <!--Slider start-->
 
@@ -153,11 +151,9 @@ include("app/database/database.php");
                     <div class="section topics">
                         <h3>Категори</h3>
                         <ul>
-                            <li><a href="#">Програмирование</a></li>
-                            <li><a href="#">Дизайн</a></li>
-                            <li><a href="#">Визуализация</a></li>
-                            <li><a href="#">Кейсы</a></li>
-                            <li><a href="#">Мотивация</a></li>
+                            <?php foreach($topics as $key => $topic):?>
+                            <li><a href="#"><?php echo $topic["name"]; ?></a></li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

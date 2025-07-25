@@ -1,6 +1,6 @@
 <?php
-session_start();
 include("../../path.php");
+include ("../../app/controllers/topics.php");
 ?>
 
 <!DOCTYPE html>
@@ -27,34 +27,32 @@ include("../../path.php");
         <?php include ("../../app/include/header-admin.php"); ?>
 
         <div class="container">
-            <div class="row">
-                <div class="sidebar col-3">
-                    <ul>
-                        <li><a href="#">Записи</a></li>
-                        <li><a href="#">Пользователи</a></li>
-                        <li><a href="#">Категории</a></li>
-                    </ul>
-                </div>
+            
+                <?php include ("../../app/include/sidebar-admin.php"); ?>
+
                 <div class="posts col-9">
                     <div class="button row">
-                        <a href="create.html" class="col-3 btn btn-success">Создать категорию</a>
+                        <a href="<?php echo BASE_URL . "admin/topics/create.php"?>" class="col-3 btn btn-success">Создать категорию</a>
                         <span class="col-1"></span>
-                        <a href="index.html" class="col-3 btn btn-warning">Управление категориями</a>
+                        <a href="<?php echo BASE_URL . "admin/topics/" ?>" class="col-3 btn btn-warning">Управление категориями</a>
                     </div>
                     <div class="row title-table">
                         <h2>Добавление категории</h2>
                     </div>
                     <div class="row add-post">
+                        <div class="mb-12 col-12 col-md-12 error">
+                            <p><i><?php echo $errorMessage ?></i></p>
+                        </div>
                         <form action="create.php" method="post">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Название категории" aria-label="Название категории">
+                                <input type="text" class="form-control" name="name" placeholder="Название категории" aria-label="Название категории">
                             </div>
                             <div class="col">
                                 <label for="content" class="form-label">Описание категории</label>
-                                <textarea class="form-control" id="content" rows="3"></textarea>
+                                <textarea class="form-control" name="description" id="content" rows="3"></textarea>
                             </div>
                             <div class="col">
-                                <button class="btn btn-primary" type="submit">Создать категорию</button>
+                                <button class="btn btn-primary" name="topic-create" type="submit">Создать категорию</button>
                             </div>
                         </form>
                     </div>
