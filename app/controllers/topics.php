@@ -4,7 +4,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-include("../../app/database/database.php");
+include(SITE_ROOT . "/app/database/database.php");
 
 $errorMessage = "";
 $topics = selectAll("topics");
