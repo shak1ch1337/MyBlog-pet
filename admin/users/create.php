@@ -40,6 +40,7 @@ include("../../path.php");
                         <h2>Создать пользователя</h2>
                     </div>
                     <div class="row add-post">
+
                         <form action="create.php" method="post">
                             <div class="col">
                                 <label for="formGroupExampleInput" class="form-label">Ваш логин</label>

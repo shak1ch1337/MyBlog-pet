@@ -44,18 +44,18 @@ include ("../../app/controllers/posts.php");
                         <div class="col-6">Управление</div>
                     </div>
                     <?php foreach($postsAdm  as $key => $post): ?>
-                    <div class="row post">
-                        <div class="id col-1"><?php echo $post["id"]?></div>
-                        <div class="title col-3"><?php echo $post["title"]?></div>
-                        <div class="author col-2"><?php echo $post["username"]?></div>
-                        <div class="red col-2"><a href="#">Edit</a></div>
-                        <div class="del col-2"><a href="#">Delete</a></div>
-                        <?php if ($post["status"]): ?>
-                        <div class="status col-2"><a href="#">Unpublish</a></div>
-                        <?php else: ?>
-                        <div class="status col-2"><a href="#">Publish</a></div>
-                        <?php endif; ?>
-                    </div>
+                        <div class="row post">
+                            <div class="id col-1"><?php echo $post["id"]?></div>
+                            <div class="title col-3"><?php echo $post["title"]?></div>
+                            <div class="author col-2"><?php echo $post["username"]?></div>
+                            <div class="red col-2"><a href="edit.php?id=<?php echo $post["id"]; ?>">Edit</a></div>
+                            <div class="del col-2"><a href="edit.php?delete_id=<?php echo $post["id"]?>">Delete</a></div>
+                            <?php if ($post["status"]): ?>
+                            <div class="status col-2"><a href="edit.php?publish=0&pub_id=<?php echo $post["id"]; ?>">Unpublish</a></div>
+                            <?php else: ?>
+                            <div class="status col-2"><a href="edit.php?publish=1&pub_id=<?php echo $post["id"]; ?>">Publish</a></div>
+                            <?php endif; ?>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>

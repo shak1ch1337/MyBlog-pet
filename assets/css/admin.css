@@ -241,3 +241,18 @@ header ul li ul li a {
 .add-post form div {
     margin: 2rem 0;
 }
+
+/*
+    Error message
+*/
+
+.add-post .err {
+    padding: 1rem 0;
+    color: rgb(133, 24, 24);
+}
+
+.add-post .err ul {
+    list-style-type: none;
+    padding-left: 10px;
+    font-weight: 500;
+}

@@ -1,7 +1,6 @@
 <?php
-session_start();
 include("../../path.php");
-include ("../../app/controllers/topics.php");
+include ("../../app/controllers/posts.php");
 ?>
 
 <!DOCTYPE html>
@@ -32,29 +31,45 @@ include ("../../app/controllers/topics.php");
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
 
                 <div class="posts col-9">
-                    <div class="button row">
-                        <a href="<?php echo BASE_URL . "admin/topics/create.php"?>" class="col-3 btn btn-success">Создать категорию</a>
-                        <span class="col-1"></span>
-                        <a href="<?php echo BASE_URL . "admin/topics/" ?>" class="col-3 btn btn-warning">Управление категориями</a>
-                    </div>
                     <div class="row title-table">
-                        <h2>Добавление категории</h2>
+                        <h2>Редактирование записи</h2>
                     </div>
                     <div class="row add-post">
                         <div class="mb-12 col-12 col-md-12 err">
-                            <?php include "../../app/helps/errorInfo.php"; ?>
+                            <!--Вывод ошибок-->
+                            <?php include "../../app/helps/errorInfo.php"?>
                         </div>
-                        <form action="edit.php" method="post">
-                            <input name="id" value="<?=$id?>" type="hidden">
+                        <form action="edit.php" method="post" enctype="multipart/form-data">
+                            <input  name="id" value="<?php echo $id; ?>">
                             <div class="col">
-                                <input type="text" class="form-control" name="name" value="<?php echo $name ?>" placeholder="Название категории" aria-label="Название категории">
+                                <input type="text" value="<?php echo $title; ?>" class="form-control" name="title" placeholder="Название статьи" aria-label="Название статьи">
                             </div>
                             <div class="col">
-                                <label for="content" class="form-label">Описание категории</label>
-                                <textarea class="form-control" name="description" id="content" rows="3"><?php echo $description ?></textarea>
+                                <label for="content" class="form-label">Содержимое записи</label>
+                                <textarea class="form-control" name="content" id="content" rows="6"><?php echo $content ?></textarea>
                             </div>
-                            <div class="col">
-                                <button class="btn btn-primary" name="topic-edit" type="submit">Создать категорию</button>
+                            <div class="input-group col">
+                                <input type="file" name="img" class="form-control" id="inputGroupFile02">
+                                <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                            </div>
+                            <select class="form-select" name="topic" aria-label="Default select example">
+                                <?php foreach($topics as $key => $topic): ?>
+                                <option value="<?php echo $topic["id"]; ?>"><?php echo $topic["name"]; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <div class="col col-6">
+                                <?php if (empty($status) && $status == 0): ?>
+                                    <input name="post_public" type="checkbox">
+                                    <label>Publish</label>
+                                <?php else: ?>
+                                    <input name="post_public" type="checkbox" checked value="1">
+                                    <label>Unpublish</label>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="col col-6">
+                                <button class="btn btn-primary" name="edit_post" type="submit">Сохранить запись</button>
                             </div>
                         </form>
                     </div>

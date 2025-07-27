@@ -2,7 +2,7 @@
 include("./app/database/database.php");
 
 $isSubmit = false;
-$errorMessage = '';
+$errorMessage = [];
 
 function userAuth($data)
 {
@@ -26,15 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-reg"]))
 {
     if ($_POST["username"] === '' || $_POST["mail"] === '' || $_POST["password_repeat"] === '')
     {
-        $errorMessage = "Не все поля заполнены!";
+        array_push($errorMessage, "Не все поля заполнены!");
     }
     elseif (mb_strlen($_POST["username"], 'UTF-8') < 3)
     {
-        $errorMessage = "Логин должен быть более двух символов!";
+        array_push($errorMessage, "Логин должен быть более двух символов!");
     }
     elseif ($_POST["password"] !== $_POST["password_repeat"])
     {
-        $errorMessage = "Пароли не совпадают!";
+        array_push($errorMessage, "Пароли не совпадают!");
     }
     else
     {
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-reg"]))
         
         if (!empty($isset_user["email"]) && $isset_user["email"] === $_POST["mail"])
         {
-            $errorMessage = "Пользователь с такой почтой уже существует!";
+            array_push($errorMessage, "Пользователь с такой почтой уже существует!");
         }
         else
         {
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-log"]))
 {
     if ($_POST["mail_login"] === '' || $_POST["password_login"] === '')
     {
-        $errorMessage = "Не все поля заполнены!";
+        array_push($errorMessage, "Не все поля заполнены!");
     }
     else
     {
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["button-log"]))
         }
         else
         {
-            $errorMessage = "Почта или пароль введены неверно!";
+            array_push($errorMessage, "Почта или пароль введены неверно!");
         }
     }
 }
