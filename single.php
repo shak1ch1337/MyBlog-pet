@@ -1,7 +1,14 @@
-<?php include("path.php"); ?>
+<?php 
+include("path.php");
+include(SITE_ROOT . "/app/controllers/topics.php");
+// include(SITE_ROOT . "/app/database/database.php");
+
+//$post = selectOne('posts', ["id" => $_GET["post"]]);
+$post = selectPostFromPostsWithUserOnSign('posts', 'users', $_GET["post"]);
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,52 +36,19 @@
                 <!--Main content-->
     
                 <div class="main-content col-md-9 col-12">
-                    <h2>Заголовок</h2>
+                    <h2><?php echo $post["title"]?></h2>
                     <div class="single_post row">
                         <div class="img col-12">
-                            <img src="assets/images/image_1.png" class="img-thumbnail">
-                            
+                            <!--<img src="assets/images/image_1.png" class="img-thumbnail">-->
+                            <img src="<?php echo BASE_URL . "assets/images/posts/" . $post["img"]?>" class="img-thumbnail">
                         </div>
                         <div class="info">
-                            <i class="far fa-user"> Имя Автора</i>
-                            <i class="far fa-calendar"> Mar 11, 2019</i>
+                            <i class="far fa-user"> <?php echo $post["username"]?></i>
+                            <i class="far fa-calendar"> <?php echo $post["create_date"]?></i>
                         </div>
                         
                         <div class="single_post_text col-12">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor a dictum non, luctus efficitur dolor.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor a dictum non, 
-                                luctus efficitur dolor. Duis et ante quis turpis lacinia malesuada. Etiam at malesuada nibh. 
-                                Praesent sem mauris, auctor vel urna ut, mattis convallis odio. Quisque in egestas sapien, 
-                                vel gravida urna.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor 
-                                a dictum non, luctus efficitur dolor. Duis et ante quis turpis lacinia malesuada. 
-                                Etiam at malesuada nibh. Praesent sem mauris, auctor vel urna ut, mattis convallis odio.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor a dictum non, luctus efficitur dolor.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor a dictum non, 
-                                luctus efficitur dolor. Duis et ante quis turpis lacinia malesuada. Etiam at malesuada nibh. 
-                                Praesent sem mauris, auctor vel urna ut, mattis convallis odio. Quisque in egestas sapien, 
-                                vel gravida urna.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor a dictum non, 
-                                luctus efficitur dolor. Duis et ante quis turpis lacinia malesuada. Etiam at malesuada nibh. 
-                                Praesent sem mauris, auctor vel urna ut, mattis convallis odio. Quisque in egestas sapien, vel gravida urna. 
-                                Aenean eu placerat est, vel blandit turpis. In hac habitasse platea dictumst. 
-                                Nunc erat magna, gravida vitae diam a, tempor cursus enim. Etiam commodo dapibus interdum. 
-                                Aliquam erat volutpat.
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque leo sem, auctor a dictum non, luctus efficitur dolor.
-                            </p>
+                            <?php echo $post["content"]; ?>
                         </div>
                     </div>
                 </div>
@@ -92,11 +66,9 @@
                     <div class="section topics">
                         <h3>Категори</h3>
                         <ul>
-                            <li><a href="#">Програмирование</a></li>
-                            <li><a href="#">Дизайн</a></li>
-                            <li><a href="#">Визуализация</a></li>
-                            <li><a href="#">Кейсы</a></li>
-                            <li><a href="#">Мотивация</a></li>
+                            <?php foreach($topics as $key => $topic):?>
+                            <li><a href="<?php echo BASE_URL . "category.php?category_id=" . $topic["id"]; ?>"><?php echo $topic["name"]; ?></a></li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

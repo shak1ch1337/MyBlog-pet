@@ -30,7 +30,10 @@ include("./app/controllers/users.php");
             <form action="log.php" method="post" class="row justify-content-center">
                 <h2>Авторизация</h2>
                 <div class="mb-3 col-12 col-md-4 error">
-                    <p><i><?php echo $errorMessage ?></i></p>
+                    <div class="mb-12 col-12 col-md-12 err">
+                            <!--Вывод ошибок-->
+                            <?php include "../../app/helps/errorInfo.php"?>
+                        </div>
                 </div>
                 <div class="w-100"></div>
                 <div class="mb-3 col-12 col-md-4">

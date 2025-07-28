@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../path.php");
+include("../../app/controllers/users.php");
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +32,7 @@ include("../../path.php");
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
 
                 <div class="posts col-9">
-                    <div class="button row">
-                        <a href="<?php echo BASE_URL . "admin/users/create.php" ?>" class="col-3 btn btn-success">Создать пользователя</a>
-                        <span class="col-1"></span>
-                        <a href="<?php echo BASE_URL . "admin/users/" ?>" class="col-3 btn btn-warning">Управление пользователями</a>
-                    </div>
+                    
                     <div class="row title-table">
                         <h2>Создать пользователя</h2>
                     </div>
@@ -43,7 +40,7 @@ include("../../path.php");
 
                         <form action="create.php" method="post">
                             <div class="col">
-                                <label for="formGroupExampleInput" class="form-label">Ваш логин</label>
+                                <label for="formGroupExampleInput" class="form-label">Логин</label>
                                 <input type="text" class="form-control" id="formGroupExampleInput" name="username" placeholder="Введите ваш логин">
                             </div>
                             <div class="col">
@@ -60,12 +57,16 @@ include("../../path.php");
                                 <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
                                 <input type="password" class="form-control" name="password_repeat" id="exampleInputPassword2" placeholder="Введите пароль еще раз">
                             </div>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>User</option>
-                                <option value="1">Admin</option>
-                            </select>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" value="1" name="admin" type="checkbox" id="checkNativeSwitch" switch>
+                                <label class="form-check-label" for="checkNativeSwitch">
+                                    Назначить администратором
+                                </label>
+                            </div>
+
                             <div class="col">
-                                <button class="btn btn-primary" type="submit">Создать пользователя</button>
+                                <button class="btn btn-primary" name="create-user" type="submit">Создать пользователя</button>
                             </div>
                         </form>
                     </div>

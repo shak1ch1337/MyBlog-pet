@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../path.php");
+include("../../app/controllers/users.php");
 ?>
 
 <!DOCTYPE html>
@@ -37,26 +38,27 @@ include("../../path.php");
                         <a href="<?php echo BASE_URL . "admin/users/" ?>" class="col-3 btn btn-warning">Управление пользователями</a>
                     </div>
                     <div class="row title-table">
-                        <h2>Управление пользователями</h2>
+                        <h2>Пользователи</h2>
                         <div class="col-1">ID</div>
-                        <div class="col-5">Логин</div>
+                        <div class="col-2">Логин</div>
+                        <div class="col-3">E-Mail</div>
                         <div class="col-2">Роль</div>
                         <div class="col-4">Управление</div>
                     </div>
+                    <?php foreach ($users as $key=>$user): ?>
                     <div class="row post">
-                        <div class="id col-1">1</div>
-                        <div class="title col-5">root</div>
-                        <div class="author col-2">Admin</div>
-                        <div class="red col-2"><a href="#">Edit</a></div>
-                        <div class="del col-2"><a href="#">Delete</a></div>
-                    </div>
-                    <div class="row post">
-                        <div class="id col-1">2</div>
-                        <div class="title col-5">Harry228</div>
+                        <div class="id col-1"><?php echo $user["id"]; ?></div>
+                        <div class="title col-2"><?php echo $user["username"]; ?></div>
+                        <div class="title col-3"><?php echo $user["email"]; ?></div>
+                        <?php if ($user["admin"] == 0): ?>
                         <div class="author col-2">User</div>
-                        <div class="red col-2"><a href="#">Edit</a></div>
-                        <div class="del col-2"><a href="#">Delete</a></div>
+                        <?php else: ?>
+                        <div class="author col-2">Admin</div>
+                        <?php endif; ?>
+                        <div class="red col-2"><a href="edit.php?edit_id=<?php echo $user["id"];?>">Edit</a></div>
+                        <div class="del col-2"><a href="index.php?delete_user=<?php echo $user["id"]?>">Delete</a></div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

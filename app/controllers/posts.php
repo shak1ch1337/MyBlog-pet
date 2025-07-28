@@ -96,6 +96,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_post"]))
 
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"]))
 {
+    $post = selectOne("posts", ["id" => $_GET["id"]]);
+    $id = $post["id"];
+    $title = $post["title"];
+    $content = $post["content"];
+    $id_topic = $post["id_topic"];
+    $status = $post["status"];
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["edit_post"]))
+{
 
     if (!empty($_FILES["img"]["name"]))
     {
@@ -125,16 +135,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"]))
         array_push($errorMessage, "Ошибка получения изображения!");
     }
 
-    $post = selectOne("posts", ["id" => $_GET["id"]]);
-    $id = $post["id"];
-    $title = $post["title"];
-    $content = $post["content"];
-    $id_topic = $post["id_topic"];
-    $status = $post["status"];
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["edit_post"]))
-{
     $id = $_POST["id"];
     $title = trim($_POST["title"]);
     $content = trim($_POST["content"]);

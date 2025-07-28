@@ -1,6 +1,7 @@
 <?php
+session_start();
 include("../../path.php");
-include ("../../app/controllers/posts.php");
+include("../../app/controllers/users.php");
 ?>
 
 <!DOCTYPE html>
@@ -31,45 +32,45 @@ include ("../../app/controllers/posts.php");
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
 
                 <div class="posts col-9">
+                    
                     <div class="row title-table">
-                        <h2>Редактирование записи</h2>
+                        <h2>Создать пользователя</h2>
                     </div>
                     <div class="row add-post">
                         <div class="mb-12 col-12 col-md-12 err">
                             <!--Вывод ошибок-->
                             <?php include "../../app/helps/errorInfo.php"?>
                         </div>
-                        <form action="edit.php" method="post" enctype="multipart/form-data">
+                        <form action="edit.php" method="post">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <div class="col">
-                                <input type="text" value="<?php echo $title; ?>" class="form-control" name="title" placeholder="Название статьи" aria-label="Название статьи">
+                                <label for="formGroupExampleInput" class="form-label">Логин</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" value="<?=$username?>" name="username" placeholder="Введите ваш логин">
                             </div>
                             <div class="col">
-                                <label for="content" class="form-label">Содержимое записи</label>
-                                <textarea class="form-control" name="content" id="content" rows="6"><?php echo $content ?></textarea>
-                            </div>
-                            <div class="input-group col">
-                                <input type="file" name="img" class="form-control" id="inputGroupFile02">
-                                <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                            </div>
-                            <select class="form-select" name="topic" aria-label="Default select example">
-                                <?php foreach($topics as $key => $topic): ?>
-                                <option value="<?php echo $topic["id"]; ?>"><?php echo $topic["name"]; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-
-                            <div class="col col-6">
-                                <?php if (empty($status) && $status == 0): ?>
-                                    <input name="post_public" type="checkbox">
-                                    <label>Publish</label>
-                                <?php else: ?>
-                                    <input name="post_public" type="checkbox" checked value="1">
-                                    <label>Unpublish</label>
-                                <?php endif; ?>
+                                <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" value="<?=$email;?>" name="mail" aria-describedby="emailHelp" placeholder="Введите ваш e-mail">
                             </div>
 
-                            <div class="col col-6">
-                                <button class="btn btn-primary" name="edit_post" type="submit">Сохранить запись</button>
+                            <div class="col">
+                                <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Введите пароль">
+                            </div>
+
+                            <div class="col">
+                                <label for="exampleInputPassword2" class="form-label">Повторите пароль</label>
+                                <input type="password" class="form-control" name="password_repeat" id="exampleInputPassword2" placeholder="Введите пароль еще раз">
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" value="1" name="admin" type="checkbox" id="checkNativeSwitch" switch>
+                                <label class="form-check-label" for="checkNativeSwitch">
+                                    Назначить администратором
+                                </label>
+                            </div>
+
+                            <div class="col">
+                                <button class="btn btn-primary" name="edit-user" type="submit">Создать пользователя</button>
                             </div>
                         </form>
                     </div>
@@ -83,8 +84,12 @@ include ("../../app/controllers/posts.php");
 
         <?php include("../../app/include/footer.php"); ?>
 
+        <script src="https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.umd.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+        <script src="../../assets/js/script.js"></script>
     </body>
 </html>

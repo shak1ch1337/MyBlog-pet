@@ -46,7 +46,7 @@ include ("../../app/controllers/posts.php");
                     <?php foreach($postsAdm  as $key => $post): ?>
                         <div class="row post">
                             <div class="id col-1"><?php echo $post["id"]?></div>
-                            <div class="title col-3"><?php echo $post["title"]?></div>
+                            <div class="title col-3"><?php echo mb_substr($post["title"], 0, 35, 'UTF-8');?></div>
                             <div class="author col-2"><?php echo $post["username"]?></div>
                             <div class="red col-2"><a href="edit.php?id=<?php echo $post["id"]; ?>">Edit</a></div>
                             <div class="del col-2"><a href="edit.php?delete_id=<?php echo $post["id"]?>">Delete</a></div>
