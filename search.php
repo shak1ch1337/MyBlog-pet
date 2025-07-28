@@ -1,9 +1,17 @@
 <?php
+
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 include("path.php");
 include("app/controllers/topics.php");
-// $posts = selectAll('posts', ["status" => 1]);
-$posts = selectAllFromPostsWithUserOnIndex('posts', 'users');
-$topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
+include(SITE_ROOT . "app/database/database.php");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["search-term"]))
+{
+    $posts = searchInTitleAndContent($_POST["search-term"], "posts", "users");
+}
 
 ?>
 <!DOCTYPE html>
@@ -27,43 +35,6 @@ $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
         
         <?php include ("app/include/header.php"); ?>
 
-        <!--Slider start-->
-
-        <div class="container">
-            <div class="row">
-                <h2 class="slider-title">Топ публикации</h2>
-            </div>
-            <div id="carouselExampleCaptions" class="carousel slide">
-                
-                    <div class="carousel-inner">
-                        <?php foreach ($topPosts as $key => $topPost): ?>
-                            <?php if ($key == 0): ?>
-                                <div class="carousel-item active">
-                            <?php else: ?>
-                                <div class="carousel-item ">
-                            <?php endif; ?>
-                                    <img src="<?php echo BASE_URL . "assets/images/posts/" . $topPost["img"]?>" class="d-block w-100">
-                                    <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                                        <h5><a href="<?php echo BASE_URL . "single.php?post=" . $topPost["id"];?>"><?php echo mb_substr($topPost["title"], 0, 40, "UTF-8") . "...";?></a></h5>
-                                    </div>
-                                </div>
-                            
-                        <?php endforeach; ?>
-                    </div>
-                
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Предыдущий</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Следующий</span>
-                </button>
-            </div>
-        </div>
-
-        <!--Slider end-->
-
         <!--Block "main"-->
 
         <div class="container">
@@ -72,7 +43,7 @@ $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
                 <!--Main content-->
     
                 <div class="main-content col-md-9 col-12">
-                    <h2>Последние публикации</h2>
+                    <h2>Результаты поиска по запросу: <strong><?php echo $_POST["search-term"];?></strong></h2>
                     <?php foreach ($posts as $post): ?>
 
                         <div class="post row">
@@ -97,25 +68,9 @@ $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
                     
                 </div>
     
-                <!--Sidebar content-->
+                <!--Search content-->
     
-                <div class="sidebar col-md-3 col-12">
-                    <div class="section search">
-                        <h3>Поиск</h3>
-                        <form action="search.php" method="post">
-                            <input type="text" name="search-term" class="text-input" placeholder="Посик...">
-                        </form>
-                    </div>
-
-                    <div class="section topics">
-                        <h3>Категори</h3>
-                        <ul>
-                            <?php foreach($topics as $key => $topic):?>
-                            <li><a href="<?php echo BASE_URL . "category.php?category_id=" . $topic["id"]; ?>"><?php echo $topic["name"]; ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
+                
             </div>
         </div>
         

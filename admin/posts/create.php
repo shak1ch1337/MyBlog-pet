@@ -40,6 +40,10 @@ include ("../../app/controllers/posts.php");
                         <h2>Добавление записи</h2>
                     </div>
                     <div class="row add-post">
+                        <div class="mb-12 col-12 col-md-12 err">
+                            <!--Вывод ошибок-->
+                            <?php include "../../app/helps/errorInfo.php"?>
+                        </div>
                         <form action="create.php" method="post" enctype="multipart/form-data">
                             <div class="col">
                                 <input type="text" class="form-control" name="title" placeholder="Название статьи" aria-label="Название статьи">
@@ -59,10 +63,21 @@ include ("../../app/controllers/posts.php");
                                 <?php endforeach; ?>
                             </select>
 
-                            <div class="col col-6">
+                            
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="post_public" type="checkbox" value="1" id="checkNativeSwitch" switch>
+                                <label class="form-check-label" for="checkNativeSwitch">
+                                    Publish
+                                </label>
+                            </div>
+
+
+
+                            <!--<div class="col col-6">
                                 <input name="post_public" type="checkbox" value="1">
                                 <label>Publish</label>
-                            </div>
+                            </div>-->
 
                             <div class="col col-6">
                                 <button class="btn btn-primary" name="add_post" type="submit">Добавить запись</button>

@@ -40,8 +40,8 @@ include ("../../app/controllers/topics.php");
                         <h2>Добавление категории</h2>
                     </div>
                     <div class="row add-post">
-                        <div class="mb-12 col-12 col-md-12 error">
-                            <p><i><?php echo $errorMessage ?></i></p>
+                        <div class="mb-12 col-12 col-md-12 err">
+                            <?php include "../../app/helps/errorInfo.php" ; ?>
                         </div>
                         <form action="create.php" method="post">
                             <div class="col">

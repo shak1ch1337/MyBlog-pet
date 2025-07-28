@@ -176,3 +176,53 @@ function selectAllFromPostsWithUsers($table1, $table2)
     databaseCheckError($query);
     return $query->fetchAll();
 }
+
+function selectAllFromPostsWithUserOnIndex($table1, $table2)
+{
+    global $pdo;
+    $sql = "SELECT post.*, user.username FROM $table1 AS post JOIN $table2 AS user ON post.id_user = user.id WHERE post.status = 1 ORDER BY post.id DESC";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+    return $query->fetchAll();
+}
+
+function selectTopPostsFromPostsWithUserOnIndex($table1)
+{
+    global $pdo;
+    $sql = "SELECT * FROM $table1 WHERE id_topic = 15";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+    return $query->fetchAll();
+}
+
+//  Поиск по заголовкам и содержимому (приметивный)
+function searchInTitleAndContent($term, $table1, $table2)
+{
+    $term = trim(strip_tags(stripcslashes(htmlspecialchars($term))));
+    global $pdo;
+    $sql = "SELECT 
+    post.*, user.username 
+    FROM $table1 AS post 
+    JOIN $table2 AS user 
+    ON post.id_user = user.id 
+    WHERE post.status = 1 
+    AND post.title LIKE '%$term%'";
+    // tt($term);
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+    return $query->fetchAll();
+}
+
+//  Выбор поста с автором для сигн
+function selectPostFromPostsWithUserOnSign($table1, $table2, $id)
+{
+    global $pdo;
+    $sql = "SELECT post.*, user.username FROM $table1 AS post JOIN $table2 AS user ON post.id_user = user.id WHERE post.id = $id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+    return $query->fetch();
+}

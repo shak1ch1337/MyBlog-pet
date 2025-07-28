@@ -339,3 +339,12 @@ header ul li ul li a {
 .reg_form .error{
     color: rgb(222, 52, 52);
 }
+
+.post_img {
+    width: 250px;
+    height: 250px;
+}
+
+.main-content {
+    min-height: 70vh;
+}

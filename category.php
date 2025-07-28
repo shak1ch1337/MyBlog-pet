@@ -1,10 +1,10 @@
 <?php
 include("path.php");
 include("app/controllers/topics.php");
-// $posts = selectAll('posts', ["status" => 1]);
-$posts = selectAllFromPostsWithUserOnIndex('posts', 'users');
-$topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
 
+$posts = selectAll("posts", ["id_topic" => $_GET["category_id"]]);
+$topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
+$category = selectOne('topics', ["id" => $_GET["category_id"]]);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -27,43 +27,6 @@ $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
         
         <?php include ("app/include/header.php"); ?>
 
-        <!--Slider start-->
-
-        <div class="container">
-            <div class="row">
-                <h2 class="slider-title">Топ публикации</h2>
-            </div>
-            <div id="carouselExampleCaptions" class="carousel slide">
-                
-                    <div class="carousel-inner">
-                        <?php foreach ($topPosts as $key => $topPost): ?>
-                            <?php if ($key == 0): ?>
-                                <div class="carousel-item active">
-                            <?php else: ?>
-                                <div class="carousel-item ">
-                            <?php endif; ?>
-                                    <img src="<?php echo BASE_URL . "assets/images/posts/" . $topPost["img"]?>" class="d-block w-100">
-                                    <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                                        <h5><a href="<?php echo BASE_URL . "single.php?post=" . $topPost["id"];?>"><?php echo mb_substr($topPost["title"], 0, 40, "UTF-8") . "...";?></a></h5>
-                                    </div>
-                                </div>
-                            
-                        <?php endforeach; ?>
-                    </div>
-                
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Предыдущий</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Следующий</span>
-                </button>
-            </div>
-        </div>
-
-        <!--Slider end-->
-
         <!--Block "main"-->
 
         <div class="container">
@@ -72,13 +35,12 @@ $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
                 <!--Main content-->
     
                 <div class="main-content col-md-9 col-12">
-                    <h2>Последние публикации</h2>
+                    <h2>Поиск по категории: <strong><?php echo $category["name"]?></strong></h2>
                     <?php foreach ($posts as $post): ?>
 
                         <div class="post row">
                             <div class="img col-12 col-md-4">
                                 <img class="img post_img col-12 col-md-4" src="<?php echo BASE_URL . "assets/images/posts/" . $post["img"] ?>">
-                                <!--<img src="assets/images/" class="img-thumbnail">-->
                             </div>
                             <div class="post_text col-12 col-md-8">
                                 <h3>
