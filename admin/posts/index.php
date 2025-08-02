@@ -25,11 +25,8 @@ include ("../../app/controllers/posts.php");
         <!--Header-->
         
         <?php include ("../../app/include/header-admin.php"); ?>
-
         <div class="container">
-            
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
-
                 <div class="posts col-9">
                     <div class="button row">
                         <a href="<?php echo BASE_URL . "admin/posts/create.php" ?>" class="col-3 btn btn-success">Создать</a>
@@ -61,8 +58,6 @@ include ("../../app/controllers/posts.php");
             </div>
         </div>
 
-        
-        
         <!--Footer-->
 
         <?php include("../../app/include/footer.php"); ?>

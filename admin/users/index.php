@@ -24,13 +24,9 @@ include("../../app/controllers/users.php");
     <body>
 
         <!--Header-->
-        
         <?php include ("../../app/include/header-admin.php"); ?>
-
         <div class="container">
-            
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
-
                 <div class="posts col-9">
                     <div class="button row">
                         <a href="<?php echo BASE_URL . "admin/users/create.php" ?>" class="col-3 btn btn-success">Создать пользователя</a>
@@ -62,8 +58,6 @@ include("../../app/controllers/users.php");
                 </div>
             </div>
         </div>
-
-        
         
         <!--Footer-->
 

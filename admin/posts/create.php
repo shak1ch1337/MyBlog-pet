@@ -71,14 +71,6 @@ include ("../../app/controllers/posts.php");
                                     Publish
                                 </label>
                             </div>
-
-
-
-                            <!--<div class="col col-6">
-                                <input name="post_public" type="checkbox" value="1">
-                                <label>Publish</label>
-                            </div>-->
-
                             <div class="col col-6">
                                 <button class="btn btn-primary" name="add_post" type="submit">Добавить запись</button>
                             </div>
@@ -87,8 +79,6 @@ include ("../../app/controllers/posts.php");
                 </div>
             </div>
         </div>
-
-        
         
         <!--Footer-->
 
