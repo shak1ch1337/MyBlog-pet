@@ -5,12 +5,18 @@ session_start();
 require "connect.php";
 
 // Функция для тестирования
+
+/*-------------------------
+
 function tt($value)
 {
     echo "<pre>";
     print_r($value);
     echo "</pre>";
+    die();
 }
+
+----------------------------*/
 
 // Проверка выполнения запроса к базе данных
 function databaseCheckError($query)
@@ -112,7 +118,6 @@ function insert($table, $params)
         $i++;
     }
     $sql = "INSERT INTO $table($columns) VALUES($mask)";
-    tt($sql);
     $query = $pdo->prepare($sql);
     $query->execute();
     databaseCheckError($query);
@@ -138,7 +143,6 @@ function update($table, $id, $params)
         $i++;
     }
     $sql = "UPDATE $table SET " . $str . " WHERE id = " . $id;
-
 
     $query = $pdo->prepare($sql);
     $query->execute();
@@ -177,10 +181,10 @@ function selectAllFromPostsWithUsers($table1, $table2)
     return $query->fetchAll();
 }
 
-function selectAllFromPostsWithUserOnIndex($table1, $table2)
+function selectAllFromPostsWithUserOnIndex($table1, $table2, $limit, $offset)
 {
     global $pdo;
-    $sql = "SELECT post.*, user.username FROM $table1 AS post JOIN $table2 AS user ON post.id_user = user.id WHERE post.status = 1 ORDER BY post.id DESC";
+    $sql = "SELECT post.*, user.username FROM $table1 AS post JOIN $table2 AS user ON post.id_user = user.id WHERE post.status = 1 ORDER BY post.id DESC LIMIT $limit OFFSET $offset";
     $query = $pdo->prepare($sql);
     $query->execute();
     databaseCheckError($query);
@@ -225,4 +229,15 @@ function selectPostFromPostsWithUserOnSign($table1, $table2, $id)
     $query->execute();
     databaseCheckError($query);
     return $query->fetch();
+}
+
+
+function countRow($table)
+{
+    global $pdo;
+    $sql = "SELECT COUNT(*) FROM $table WHERE status = 1";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    databaseCheckError($query);
+    return $query->fetchColumn();
 }

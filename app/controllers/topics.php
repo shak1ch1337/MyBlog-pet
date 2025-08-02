@@ -1,9 +1,5 @@
 <?php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
 include(SITE_ROOT . "/app/database/database.php");
 
 $errorMessage = [];
@@ -62,7 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["id"]))
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["topic-edit"]))
 {
-    //tt($_POST);
     $name = trim($_POST["name"]);
     $description = trim($_POST["description"]);
 

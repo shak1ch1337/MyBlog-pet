@@ -24,20 +24,14 @@ include("../../app/controllers/users.php");
     <body>
 
         <!--Header-->
-        
         <?php include ("../../app/include/header-admin.php"); ?>
-
         <div class="container">
-            
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
-
                 <div class="posts col-9">
-                    
                     <div class="row title-table">
                         <h2>Создать пользователя</h2>
                     </div>
                     <div class="row add-post">
-
                         <form action="create.php" method="post">
                             <div class="col">
                                 <label for="formGroupExampleInput" class="form-label">Логин</label>
@@ -64,7 +58,6 @@ include("../../app/controllers/users.php");
                                     Назначить администратором
                                 </label>
                             </div>
-
                             <div class="col">
                                 <button class="btn btn-primary" name="create-user" type="submit">Создать пользователя</button>
                             </div>
@@ -74,8 +67,6 @@ include("../../app/controllers/users.php");
             </div>
         </div>
 
-        
-        
         <!--Footer-->
 
         <?php include("../../app/include/footer.php"); ?>

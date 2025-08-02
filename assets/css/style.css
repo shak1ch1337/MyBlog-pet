@@ -348,3 +348,7 @@ header ul li ul li a {
 .main-content {
     min-height: 70vh;
 }
+
+.accordion-body a{
+    color: rgb(61, 105, 119);
+}

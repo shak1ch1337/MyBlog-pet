@@ -1,10 +1,6 @@
 <?php
 include(SITE_ROOT . "/app/database/database.php");
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
 $isSubmit = false;
 $errorMessage = [];
 $users = selectAll("users");

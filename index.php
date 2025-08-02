@@ -1,9 +1,19 @@
 <?php
 include("path.php");
 include("app/controllers/topics.php");
-// $posts = selectAll('posts', ["status" => 1]);
-$posts = selectAllFromPostsWithUserOnIndex('posts', 'users');
+
+
+
+
+$page = isset($_GET["page"]) ? $_GET["page"] : 1;
+$limit = 3;
+$offset = $limit * ($page - 1);
+//tt($offset);
+$totalPages = round(countRow("posts") / $limit, 0);
+
 $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
+$posts = selectAllFromPostsWithUserOnIndex('posts', 'users', $limit, $offset);
+//tt($posts);
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +103,8 @@ $topPosts = selectTopPostsFromPostsWithUserOnIndex("posts");
                         </div>
 
                     <?php endforeach; ?>
-
+                    <!--Подключение пагинации-->
+                    <?php include "app/include/pagination.php";?>
                     
                 </div>
     

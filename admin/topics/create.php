@@ -25,11 +25,8 @@ include ("../../app/controllers/topics.php");
         <!--Header-->
         
         <?php include ("../../app/include/header-admin.php"); ?>
-
         <div class="container">
-            
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
-
                 <div class="posts col-9">
                     <div class="button row">
                         <a href="<?php echo BASE_URL . "admin/topics/create.php"?>" class="col-3 btn btn-success">Создать категорию</a>
@@ -60,8 +57,6 @@ include ("../../app/controllers/topics.php");
             </div>
         </div>
 
-        
-        
         <!--Footer-->
 
         <?php include("../../app/include/footer.php"); ?>

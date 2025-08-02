@@ -4,18 +4,17 @@
             <div class="footer-section about col-md-4 col-12">
                 <h3 class="logo-text">Мой блог</h3>
                 <p>
-                    Мой блог - это блог сделанный с целью обучения аудитории на платформе 
-                    YouTube и заработка дополнительной кармы)).
+                    Мой блог - это блог сделанный с целью изучения языка PHP и использование PDO.
                 </p>
                 <div class="contact">
                     <span><i class="fas fa-phone"></i>&nbsp; 123-456-789</span>
                     <span><i class="fas fa-envelope"></i>&nbsp; info@myblog.com</span>
                 </div>
                 <div class="socials">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 

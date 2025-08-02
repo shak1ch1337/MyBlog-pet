@@ -27,9 +27,7 @@ include ("../../app/controllers/posts.php");
         <?php include ("../../app/include/header-admin.php"); ?>
 
         <div class="container">
-            
                 <?php include ("../../app/include/sidebar-admin.php"); ?>
-
                 <div class="posts col-9">
                     <div class="row title-table">
                         <h2>Редактирование записи</h2>
@@ -76,8 +74,6 @@ include ("../../app/controllers/posts.php");
                 </div>
             </div>
         </div>
-
-        
         
         <!--Footer-->
 
